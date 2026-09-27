@@ -243,6 +243,7 @@ section { padding: 52px 0; }
   white-space: nowrap;
 }
 .section-head .tag-title.load { color: var(--red); text-shadow: 0 0 14px rgba(255,43,31,0.4); }
+.section-head .tag-title.dev { color: var(--bone); text-shadow: 0 0 14px rgba(239,233,220,0.25); }
 .section-head .tag-title.play { color: var(--green); text-shadow: 0 0 14px rgba(59,255,111,0.4); }
 .section-head .tag-title .cursor { animation: blink 1s steps(2,start) infinite; }
 .section-head .rule { flex: 1; height: 2px; background: var(--line); }
@@ -492,6 +493,11 @@ section { padding: 52px 0; }
   background: rgba(255,43,31,0.09);
   animation: badgePulse 2.2s ease-in-out infinite;
 }
+.badge-dev {
+  color: var(--text-2);
+  border-color: var(--line-bright);
+  background: rgba(255,255,255,0.03);
+}
 .badge-prereg {
   color: var(--red);
   border-color: rgba(255,43,31,0.5);
@@ -510,6 +516,44 @@ section { padding: 52px 0; }
   margin-bottom: 20px;
 }
 .featured .card-desc { font-size: 17px; }
+
+/* in-development grid */
+.dev-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+.dev-grid .game-card { margin-bottom: 0; display: flex; flex-direction: column; }
+.dev-grid .card-banner { height: 170px; }
+.dev-grid .game-title { font-size: 15px; }
+.dev-grid .card-desc { font-size: 15px; }
+.game-card.dev:hover { border-color: var(--line-bright); }
+.banner-cat-ball {
+  background:
+    radial-gradient(ellipse at 50% 120%, rgba(59,255,111,0.18) 0%, transparent 60%),
+    linear-gradient(180deg, #050807 0%, #0b1410 100%);
+}
+.banner-classified {
+  background:
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.025) 0 10px, transparent 10px 20px),
+    linear-gradient(180deg, #060606 0%, #0d0d0d 100%);
+}
+.sprite-ball { width: 92px; height: 92px; animation: ballRoll 3.2s ease-in-out infinite; }
+@keyframes ballRoll {
+  0%, 100% { transform: translateX(-18px) rotate(-10deg); }
+  50% { transform: translateX(18px) rotate(10deg); }
+}
+.sprite-q { width: 60px; height: 84px; animation: glitch 3.6s steps(1, end) infinite; }
+@keyframes glitch {
+  0%, 86%, 100% { transform: translate(0,0); opacity: 1; }
+  88% { transform: translate(-4px, 1px); opacity: 0.6; }
+  90% { transform: translate(3px, -1px); opacity: 1; }
+  92% { transform: translate(0,0); opacity: 0.4; }
+}
+.redacted { position: relative; }
+.redacted::after {
+  content: '';
+  position: absolute; left: -2px; right: -2px; top: 46%;
+  height: 2px;
+  background: var(--red);
+  opacity: 0.7;
+}
 
 /* in-game stat strip (Dead Passage) */
 .game-stats {
@@ -727,6 +771,7 @@ footer { padding: 80px 0 54px; text-align: center; }
   .reveal, .coin-line, .marquee, .hero-tagline, .hud,
   .logo-mark .lt, .hud .val { opacity: 1; transform: none; }
   .ember, .sweep { display: none; }
+  .sprite-ball, .sprite-q { animation: none; }
 }
 
 @media (max-width: 720px) {
@@ -747,6 +792,7 @@ footer { padding: 80px 0 54px; text-align: center; }
   .section-head .meta { display: none; }
   .foot-bottom { flex-direction: column; gap: 12px; }
   .game-stats { grid-template-columns: repeat(3, 1fr); }
+  .dev-grid { grid-template-columns: 1fr; }
   .game-stats .stat:nth-child(4) { border-left: 0; }
   .game-stats .stat:nth-child(n+4) { border-top: 2px solid var(--line); }
   .cta { font-size: 10px; padding: 13px 16px; }
@@ -779,7 +825,7 @@ footer { padding: 80px 0 54px; text-align: center; }
         <div class="key px">Shipped</div>
       </div>
       <div class="cell">
-        <div class="val r">1</div>
+        <div class="val r">2</div>
         <div class="key px">In Dev</div>
       </div>
       <div class="cell">
@@ -889,6 +935,54 @@ footer { padding: 80px 0 54px; text-align: center; }
         </a>
       </div>
     </article>
+  </section>
+
+  <section class="reveal">
+    <div class="section-head">
+      <div class="tag-title px dev">In Development<span class="cursor">_</span></div>
+      <div class="rule"></div>
+      <div class="meta px">Coming soon</div>
+    </div>
+
+    <div class="dev-grid">
+      <article class="game-card dev">
+        <div class="card-banner banner-cat-ball" data-burst>
+          <span class="sweep"></span>
+          <svg class="sprite sprite-ball" id="ballArt" viewBox="0 0 14 14" role="img" aria-label="Pixel cat in a ball"></svg>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h2 class="game-title">Super Cat Ball</h2>
+            <span class="badge badge-dev">In Dev</span>
+          </div>
+          <p class="card-desc">Tilt the world and roll a tiny cat through the rooms of a giant house. Dodge wind-up toys, collect fish, and beat the clock, room by room.</p>
+          <div class="card-tags">
+            <span class="tag">platformer</span>
+            <span class="tag">tilt</span>
+            <span class="tag">cats</span>
+            <span class="tag">android</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="game-card dev classified">
+        <div class="card-banner banner-classified" data-burst>
+          <span class="sweep"></span>
+          <svg class="sprite sprite-q" id="qArt" viewBox="0 0 10 14" role="img" aria-label="Pixel question mark"></svg>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h2 class="game-title redacted">Classified</h2>
+            <span class="badge badge-dev">Playtest Soon</span>
+          </div>
+          <p class="card-desc">Something bigger is being built. An online world, a first playtest on the horizon, and not much else we can say yet.</p>
+          <div class="card-tags">
+            <span class="tag">online</span>
+            <span class="tag">???</span>
+          </div>
+        </div>
+      </article>
+    </div>
   </section>
 
   <div class="studio-block reveal">
@@ -1061,6 +1155,46 @@ footer { padding: 80px 0 54px; text-align: center; }
       { '#': BONE, 'r': RED, 'G': GREEN, 'f': FLAME_O, 'F': FLAME_R },
       { 'f': 'flame', 'F': 'flame', 'G': 'gem' });
   }
+
+  /* ---------- CAT BALL (Super Cat Ball) ---------- */
+  var ballMap = [
+    '....######....',
+    '..##gggggg##..',
+    '.#gggggggggg#.',
+    '.#gggkgggkgg#.',
+    '#ggggkkgkkggg#',
+    '#gggkkkkkkkgg#',
+    '#gggkEkkkEkgg#',
+    '#gggkkkPkkkgg#',
+    '#ggggkkkkkggg#',
+    '#gggggggggggg#',
+    '.#gggggggggg#.',
+    '.#gggggggggg#.',
+    '..##gggggg##..',
+    '....######....'
+  ];
+  var ball = document.getElementById('ballArt');
+  if (ball) {
+    drawPixels(ball, ballMap, { '#': GREEN, 'g': '#0f2a19', 'k': '#d9a441', 'E': DARK, 'P': '#ff8fa3' });
+  }
+
+  /* ---------- ??? (Classified) ---------- */
+  var qMap = [
+    '..######..',
+    '.########.',
+    '###....###',
+    '###....###',
+    '.......###',
+    '......###.',
+    '.....###..',
+    '....###...',
+    '....###...',
+    '..........',
+    '....###...',
+    '....###...'
+  ];
+  var q = document.getElementById('qArt');
+  if (q) { drawPixels(q, qMap, { '#': RED }); }
 
   /* ---------- green hit-burst + arcade score popup ---------- */
   var SCORES = ['+10', '+10', '+25', '+25', '+50', '+100'];
