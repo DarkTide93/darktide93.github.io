@@ -88,7 +88,10 @@ header.hero {
 }
 
 .coin-line {
-  display: inline-flex;
+  display: flex;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
   align-items: center;
   gap: 10px;
   font-size: 9px;
@@ -483,6 +486,12 @@ section { padding: 52px 0; }
   background: rgba(59,255,111,0.07);
   box-shadow: 0 0 14px rgba(59,255,111,0.12);
 }
+.badge-new {
+  color: var(--red);
+  border-color: rgba(255,43,31,0.5);
+  background: rgba(255,43,31,0.09);
+  animation: badgePulse 2.2s ease-in-out infinite;
+}
 .badge-prereg {
   color: var(--red);
   border-color: rgba(255,43,31,0.5);
@@ -501,6 +510,27 @@ section { padding: 52px 0; }
   margin-bottom: 20px;
 }
 .featured .card-desc { font-size: 17px; }
+
+/* in-game stat strip (Dead Passage) */
+.game-stats {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  border: 2px solid var(--line);
+  background: rgba(0,0,0,0.25);
+  margin-bottom: 22px;
+}
+.game-stats .stat { padding: 12px 6px; text-align: center; }
+.game-stats .stat + .stat { border-left: 2px solid var(--line); }
+.game-stats b {
+  display: block;
+  font-family: 'Silkscreen', monospace;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--red);
+  text-shadow: 0 0 12px rgba(255,43,31,0.45);
+}
+.game-stats span { display: block; font-size: 7px; letter-spacing: 1px; color: var(--text-dim); margin-top: 8px; }
 
 .card-tags {
   display: flex;
@@ -642,6 +672,27 @@ footer { padding: 80px 0 54px; text-align: center; }
 .foot-email:hover, .foot-email:focus-visible { color: var(--green); outline: none; }
 .foot-email:hover::after, .foot-email:focus-visible::after { transform: scaleX(1); }
 
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: -18px 0 44px;
+}
+.social {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-2);
+  text-decoration: none;
+  padding: 10px 16px;
+  border: 2px solid var(--line);
+  background: var(--surface);
+  box-shadow: 4px 4px 0 var(--shadow-hard);
+  transition: color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+.social:hover, .social:focus-visible { color: var(--green); border-color: var(--green-dim); outline: none; }
+.social:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--shadow-hard); }
+
 .foot-bottom {
   display: flex;
   justify-content: space-between;
@@ -695,6 +746,9 @@ footer { padding: 80px 0 54px; text-align: center; }
   .studio-block { padding: 46px 22px; }
   .section-head .meta { display: none; }
   .foot-bottom { flex-direction: column; gap: 12px; }
+  .game-stats { grid-template-columns: repeat(3, 1fr); }
+  .game-stats .stat:nth-child(4) { border-left: 0; }
+  .game-stats .stat:nth-child(n+4) { border-top: 2px solid var(--line); }
   .cta { font-size: 10px; padding: 13px 16px; }
 }
 </style>
@@ -721,7 +775,7 @@ footer { padding: 80px 0 54px; text-align: center; }
 
     <div class="hud" role="group" aria-label="Studio stats">
       <div class="cell">
-        <div class="val g">2</div>
+        <div class="val g">3</div>
         <div class="key px">Shipped</div>
       </div>
       <div class="cell">
@@ -737,9 +791,9 @@ footer { padding: 80px 0 54px; text-align: center; }
 
   <section class="reveal">
     <div class="section-head">
-      <div class="tag-title px load">Now Loading<span class="cursor">_</span></div>
+      <div class="tag-title px load">New Release<span class="cursor">_</span></div>
       <div class="rule"></div>
-      <div class="meta px">Pre-registration open on Google Play</div>
+      <div class="meta px">Out now on Google Play</div>
     </div>
 
     <article class="game-card featured">
@@ -752,19 +806,29 @@ footer { padding: 80px 0 54px; text-align: center; }
       <div class="card-body">
         <div class="card-meta">
           <h2 class="game-title">Dead Passage</h2>
-          <span class="badge badge-prereg">Pre-Reg Open</span>
+          <span class="badge badge-new">Out Now</span>
         </div>
-        <p class="card-desc">A pixelated on-rails FPS through the gates of hell. Fight zombies and demon bosses, collect pets, upgrade weapons, and survive the Hellgate. Retro shooter energy meets modern feel.</p>
+        <p class="card-desc">A retro on-rails zombie shooter. Hold the rooftop, shake zombies off your chopper's skids, chain oil-tanker explosions, and fight demon bosses through the gates of hell. Max flies, Jax is on the gun.</p>
+        <div class="game-stats" aria-label="What's in the game">
+          <div class="stat"><b>10</b><span class="px">Levels</span></div>
+          <div class="stat"><b>2</b><span class="px">Raids</span></div>
+          <div class="stat"><b>&infin;</b><span class="px">Endless</span></div>
+          <div class="stat"><b>6</b><span class="px">Companions</span></div>
+          <div class="stat"><b>6</b><span class="px">Weapons</span></div>
+          <div class="stat"><b>25</b><span class="px">Upgrades</span></div>
+        </div>
         <div class="card-tags">
+          <span class="tag">zombies</span>
           <span class="tag">fps</span>
           <span class="tag">on-rails</span>
           <span class="tag">retro</span>
           <span class="tag">action</span>
           <span class="tag">android</span>
+          <span class="tag">free</span>
         </div>
         <a href="https://play.google.com/store/apps/details?id=com.maxjax.deadpassage" class="cta cta-hell">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
-          Pre-register on Google Play<span class="arrow">&rarr;</span>
+          Get on Google Play<span class="arrow">&rarr;</span>
         </a>
       </div>
     </article>
@@ -836,6 +900,10 @@ footer { padding: 80px 0 54px; text-align: center; }
   <footer class="reveal">
     <div class="foot-cta px">Get in touch</div>
     <a href="mailto:max.jax.studios@gmail.com" class="foot-email">max.jax.studios@gmail.com</a>
+    <nav class="socials" aria-label="Follow Max &amp; Jax Studios">
+      <a class="social px" href="https://www.youtube.com/@MaxJaxGames" target="_blank" rel="noopener">YouTube</a>
+      <a class="social px" href="https://www.tiktok.com/@maxjaxstudios" target="_blank" rel="noopener">TikTok</a>
+    </nav>
     <div class="foot-bottom">
       <div>&copy; 2026 Max &amp; Jax Studios</div>
       <div>Built with care, shipped with love</div>
